@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Megrim&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Library</title>
+  </head> 
+  <body>
+    <!----------------------Header------------- -->
+
+    <div class="header">
+      <h1>Welcome To <em>Your</em> Library</h1>
+      <button id="addBookBtn">Add Book</button>
+    </div>
+
+    <!----------------------Card--------------->
+    <div class="library-container">
+        <div class="book-card"></div>
+    </div>
+    <!----------------------Form--------------->
+
+    <dialog id="bookDialog">
+        <div class="dialog-content">
+            <form action="">
+                <div class="form-box">
+                  <label for="title">Book Title:</label>
+                  <input type="text" id="title" placeholder="Title" />
+                </div>
+                <div class="form-box">
+                  <label for="title">Author:</label>
+                  <input type="text" id="author" placeholder="Author" />
+                </div>
+                <div class="form-box">
+                  <label for="title">Number of Pages:</label>
+                  <input type="text" id="pages" placeholder="Pages" />
+                </div>
+              
+                <div class="form-box" id="btn-container">
+                  <button id="add-btn">Add</button>
+                </div>
+          
+              
+              </form>
+      </dialog>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
