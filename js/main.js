@@ -1,4 +1,5 @@
 const myLibrary = [];
+let nextId = 0;
 
 //-------constructor----------------
 
@@ -12,18 +13,87 @@ function Book(title, author, pages, read, id) {
 
 const addBookBtn = document.querySelector("#addBookBtn");
 const dialog = document.querySelector("#bookDialog");
+const bookForm = document.querySelector("#bookForm");
+const addBtn = document.querySelector("#add-btn");
+const libraryContainer = document.querySelector(".library-container");
+
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault(); // keep page from reloading
+
+  /* 1. PULL VALUES OUT OF THE FORM ------------------------------ */
+  const title = bookForm.title.value.trim();
+  const author = bookForm.author.value.trim();
+  const pages = parseInt(bookForm.pages.value, 10);
+  const read = bookForm.read.checked;
+
+  /* 2. BUILD A BOOK OBJECT & STORE IT --------------------------- */
+  const book = new Book(title, author, pages, read, nextId++);
+  myLibrary.push(book);
+
+  /* 3. RERENDER THE GRID --------------------------------------- */
+  renderLibrary();
+
+  /* 4. RESET & CLOSE ------------------------------------------- */
+  bookForm.reset();
+  dialog.close();
+});
 
 //opens dialog on btn click
 addBookBtn.addEventListener("click", () => {
   dialog.showModal();
 });
 
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
+//adds books to screen
+// addBtn.addEventListener("click", () => {
+//   let newBook = document.createElement("div");
+//   newBook.classList.add("book-card");
+//   libraryContainer.appendChild(newBook);
+
+//   newBook.textContent = "";
+// });
+
+libraryContainer.addEventListener("click", (e) => {
+  if (!e.target.matches(".remove-btn")) return; // ignore other clicks
+
+  const card = e.target.closest(".book-card");
+  const id = +card.dataset.id; // + converts to number
+  const index = myLibrary.findIndex((b) => b.id === id);
+
+  if (index !== -1) myLibrary.splice(index, 1); // remove from the array
+  renderLibrary(); // redraw without the book
+});
+
+function renderLibrary() {
+  libraryContainer.innerHTML = ""; // clear old cards
+
+  myLibrary.forEach((book) => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+    card.dataset.id = book.id; // handy for later actions
+
+    card.innerHTML = `
+        <h3>${book.title}</h3>
+        <p><em>${book.author}</em></p>
+        <p>${book.pages} pages</p>
+        <p class="read">${book.read ? "✅ Read" : "📖 Not read yet"}</p>
+      
+
+    <button class="remove-btn" aria-label="Remove book">
+      🗑 Remove
+    </button>`;
+
+    libraryContainer.appendChild(card);
+  });
+}
+
 //closes dialog when clicking outside of it neat trick
 dialog.addEventListener("click", (e) => {
   if (e.target === dialog) {
     dialog.close();
-    searchQuery.value = "";
-    searchResults.innerHTML = "";
   }
 });
 

@@ -22,25 +22,32 @@
 
     <!----------------------Card--------------->
     <div class="library-container">
-        <div class="book-card"></div>
+        <!-- <div class="book-card"></div> -->
     </div>
     <!----------------------Form--------------->
 
     <dialog id="bookDialog">
         <div class="dialog-content">
-            <form action="">
+            <form action="" id="bookForm">
                 <div class="form-box">
                   <label for="title">Book Title:</label>
                   <input type="text" id="title" placeholder="Title" />
                 </div>
                 <div class="form-box">
-                  <label for="title">Author:</label>
+                  <label for="author">Author:</label>
                   <input type="text" id="author" placeholder="Author" />
                 </div>
                 <div class="form-box">
-                  <label for="title">Number of Pages:</label>
+                  <label for="pages">Number of Pages:</label>
                   <input type="text" id="pages" placeholder="Pages" />
                 </div>
+
+                <div class="form-box">
+                    <label>
+                      <input id="read" name="read" type="checkbox" />
+                      Already read
+                    </label>
+                  </div>
               
                 <div class="form-box" id="btn-container">
                   <button id="add-btn">Add</button>
